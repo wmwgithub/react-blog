@@ -7,7 +7,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <p>
-            Edit <Button>src/App.js</Button> and save to reload.
+            Edit <Button>App.js</Button> and save to reload.
           </p>
         </header>
         <Button type='primary' shape='circle' icon='search'></Button>
