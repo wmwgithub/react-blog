@@ -51,9 +51,9 @@ module.exports = function (webpackEnv) {
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
   // In development, we always serve from the root. This makes config easier.
-  const publicPath = isEnvProduction
-    ? paths.servedPath
-    : isEnvDevelopment && '/';
+  const publicPath = isEnvProduction ?
+    paths.servedPath :
+    isEnvDevelopment && '/';
   // Some apps do not use client-side routing with pushState.
   // For these, "homepage" can be set to "." to enable relative asset paths.
   const shouldUseRelativeAssetPaths = publicPath === './';
@@ -61,9 +61,9 @@ module.exports = function (webpackEnv) {
   // `publicUrl` is just like `publicPath`, but we will provide it to our app
   // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
   // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
-  const publicUrl = isEnvProduction
-    ? publicPath.slice(0, -1)
-    : isEnvDevelopment && '';
+  const publicUrl = isEnvProduction ?
+    publicPath.slice(0, -1) :
+    isEnvDevelopment && '';
   // Get environment variables to inject into our app.
   const env = getClientEnvironment(publicUrl);
 
@@ -73,9 +73,10 @@ module.exports = function (webpackEnv) {
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
         loader: MiniCssExtractPlugin.loader,
-        options: Object.assign(
-          {},
-          shouldUseRelativeAssetPaths ? { publicPath: '../../' } : undefined
+        options: Object.assign({},
+          shouldUseRelativeAssetPaths ? {
+            publicPath: '../../'
+          } : undefined
         ),
       },
       {
@@ -119,11 +120,11 @@ module.exports = function (webpackEnv) {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
-    devtool: isEnvProduction
-      ? shouldUseSourceMap
-        ? 'source-map'
-        : false
-      : isEnvDevelopment && 'cheap-module-source-map',
+    devtool: isEnvProduction ?
+      shouldUseSourceMap ?
+      'source-map' :
+      false :
+      isEnvDevelopment && 'cheap-module-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
@@ -152,23 +153,23 @@ module.exports = function (webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].js'
-        : isEnvDevelopment && 'static/js/bundle.js',
+      filename: isEnvProduction ?
+        'static/js/[name].[contenthash:8].js' :
+        isEnvDevelopment && 'static/js/bundle.js',
       // There are also additional JS chunk files if you use code splitting.
-      chunkFilename: isEnvProduction
-        ? 'static/js/[name].[contenthash:8].chunk.js'
-        : isEnvDevelopment && 'static/js/[name].chunk.js',
+      chunkFilename: isEnvProduction ?
+        'static/js/[name].[contenthash:8].chunk.js' :
+        isEnvDevelopment && 'static/js/[name].chunk.js',
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
       // Point sourcemap entries to original disk location (format as URL on Windows)
-      devtoolModuleFilenameTemplate: isEnvProduction
-        ? info =>
-          path
-            .relative(paths.appSrc, info.absoluteResourcePath)
-            .replace(/\\/g, '/')
-        : isEnvDevelopment &&
+      devtoolModuleFilenameTemplate: isEnvProduction ?
+        info =>
+        path
+        .relative(paths.appSrc, info.absoluteResourcePath)
+        .replace(/\\/g, '/') :
+        isEnvDevelopment &&
         (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     },
     optimization: {
@@ -221,16 +222,16 @@ module.exports = function (webpackEnv) {
         new OptimizeCSSAssetsPlugin({
           cssProcessorOptions: {
             parser: safePostCssParser,
-            map: shouldUseSourceMap
-              ? {
+            map: shouldUseSourceMap ?
+              {
                 // `inline: false` forces the sourcemap to be output into a
                 // separate file
                 inline: false,
                 // `annotation: true` appends the sourceMappingURL to the end of
                 // the css file, helping the browser find the sourcemap
                 annotation: true,
-              }
-              : false,
+              } :
+              false,
           },
         }),
       ],
@@ -291,23 +292,25 @@ module.exports = function (webpackEnv) {
       strictExportPresence: true,
       rules: [
         // Disable require.ensure as it's not a standard language feature.
-        { parser: { requireEnsure: false } },
+        {
+          parser: {
+            requireEnsure: false
+          }
+        },
 
         // First, run the linter.
         // It's important to do this before Babel processes the JS.
         {
           test: /\.(js|mjs|jsx)$/,
           enforce: 'pre',
-          use: [
-            {
-              options: {
-                formatter: require.resolve('react-dev-utils/eslintFormatter'),
-                eslintPath: require.resolve('eslint'),
+          use: [{
+            options: {
+              formatter: require.resolve('react-dev-utils/eslintFormatter'),
+              eslintPath: require.resolve('eslint'),
 
-              },
-              loader: require.resolve('eslint-loader'),
             },
-          ],
+            loader: require.resolve('eslint-loader'),
+          }, ],
           include: paths.appSrc,
         },
         {
@@ -375,7 +378,9 @@ module.exports = function (webpackEnv) {
                 presets: [
                   [
                     require.resolve('babel-preset-react-app/dependencies'),
-                    { helpers: true },
+                    {
+                      helpers: true
+                    },
                   ],
                 ],
                 cacheDirectory: true,
@@ -425,8 +430,7 @@ module.exports = function (webpackEnv) {
             {
               test: sassRegex,
               exclude: sassModuleRegex,
-              use: getStyleLoaders(
-                {
+              use: getStyleLoaders({
                   importLoaders: 2,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                 },
@@ -442,8 +446,7 @@ module.exports = function (webpackEnv) {
             // using the extension .module.scss or .module.sass
             {
               test: sassModuleRegex,
-              use: getStyleLoaders(
-                {
+              use: getStyleLoaders({
                   importLoaders: 2,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                   modules: true,
@@ -455,8 +458,7 @@ module.exports = function (webpackEnv) {
             //less-loader
             {
               test: lessRegex,
-              use: [
-                {
+              use: [{
                   loader: "style-loader"
                 },
                 {
@@ -468,6 +470,9 @@ module.exports = function (webpackEnv) {
                 {
                   loader: "less-loader",
                   options: {
+                    modifyvars: {
+                      'primary-color': '#00CED1',
+                    },
                     javascriptEnabled: true,
                   }
                 }
@@ -493,28 +498,26 @@ module.exports = function (webpackEnv) {
     plugins: [
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
-        Object.assign(
-          {},
-          {
+        Object.assign({}, {
             inject: true,
             template: paths.appHtml,
           },
-          isEnvProduction
-            ? {
-              minify: {
-                removeComments: true,
-                collapseWhitespace: true,
-                removeRedundantAttributes: true,
-                useShortDoctype: true,
-                removeEmptyAttributes: true,
-                removeStyleLinkTypeAttributes: true,
-                keepClosingSlash: true,
-                minifyJS: true,
-                minifyCSS: true,
-                minifyURLs: true,
-              },
-            }
-            : undefined
+          isEnvProduction ?
+          {
+            minify: {
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
+            },
+          } :
+          undefined
         )
       ),
       // Inlines the webpack runtime script. This script is too small to warrant

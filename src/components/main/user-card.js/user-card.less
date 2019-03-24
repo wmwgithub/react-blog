@@ -1,0 +1,21 @@
+@avaturWidth:60px;
+@avaturRadius:5px;
+@cardNameSize:18px;
+.userCard{
+  display: flex;
+  flex-direction: row;
+}
+img{
+  width: @avaturWidth;
+  height: @avaturWidth;
+  border-radius: @avaturRadius;
+}
+.cardText{
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.cardUserName{
+  font-size: @cardNameSize;
+  font-weight: bolder;
+}
