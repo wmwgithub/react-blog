@@ -60,7 +60,6 @@ class Editor extends React.Component{
           <Col xs={{span:1}} lg={{span:3}}></Col>
         </Row> */}
         {/* <Form layout='inline'>水平按钮 */}
-      
         <Form layout='horizontal'>
         {/* 默认值是垂直按钮 */}
           <FormItem {...formItemLayout} label='文章标题' >
