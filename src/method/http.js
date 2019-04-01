@@ -12,7 +12,7 @@ class Http {
       axios
         .get(`${url}/acticle`)
         .then((res) => {
-          if (res.state = 200) {
+          if (res.status == 200) {
             if (showMsg) {
               message.success('欢迎你')
             }
@@ -40,12 +40,32 @@ class Http {
       return 0
     }
     return axios
-    .post(`${url}/writeacticle`)
+    .post(`${url}/writeacticle`,JSON.stringify({title,text}))
     .then((res)=>{
       if(res.data.success){
         message.success('~成功发布文章~')
         return res.data.success
       }
+    })
+  }
+  static allActicle(userId){
+    let url = this.baseUrl
+    if(!userId){
+      message.error(`userId is required ${userId}`)
+      return 0
+    }
+    return axios
+    .post(`${url}/allacticle`,JSON.stringify({userid:userId}))
+    .then((res)=>{
+      return res.data.data.list
+    })
+  }
+  static search(userId,title){
+    let url = this.baseUrl
+    return axios
+    .get(`${url}/search`,JSON.stringify({userId,title}))
+    .then((res)=>{
+      return res.data.data.list
     })
   }
 }

@@ -5,9 +5,11 @@ class EditorButton extends React.Component{
   render(){
     return (
       <div>
-        <Button>
-          <Icon type='tool' />管理文章
-        </Button>
+        <Link to="/manage/acticle">
+          <Button>
+            <Icon type='tool' />管理文章
+          </Button>
+        </Link>
         <div style={{display:'inline-block',width:'10px'}}></div>
         {/* <Button> */}
           {/* <Icon type='edit' />添加文章 */}

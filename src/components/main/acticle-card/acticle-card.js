@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card ,Icon,Pagination} from 'antd'
+import {Card ,Icon,Pagination,Rate} from 'antd'
 import './acticle-card.less'
 import Http from '../../../method/http.js'
 class ActicleCard extends React.Component{
@@ -34,7 +34,7 @@ class ActicleCard extends React.Component{
       <div>
         {
           this.state.acticleArray.map((value,index)=>        
-          <Card className='acticleCard' title={`${index+1}. ${value.title} `} extra={<Icon type='bell' theme='twoTone' />} key={`ActicleCard${index}`} >
+          <Card className='acticleCard' title={`${index+1}. ${value.title} `} extra={<Rate count={1} />} key={`ActicleCard${index}`} >
           <p className='text'>{value.text}</p>
           <p className='time'>{value.data}</p>
          </Card>)
