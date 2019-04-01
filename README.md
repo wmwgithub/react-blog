@@ -1,4 +1,5 @@
 ### react 博客 
 - 初始化 `yarn install`
 - 2019/3/21 构建博客项目目录
-- react-router-dom ^4.4.0
+- react-router-dom `^4.4.0`
+- 2019/4/2 完成写文章.预览,文章管理与展示,以及搜索模块
