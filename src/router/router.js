@@ -4,6 +4,8 @@ import App from '../App'
 import Write from '../pages/write'
 import NoMatch from '../pages/no-match'
 import ManageActicle from '../pages/manage/acticle'
+import ActicleInfo from '../components/acticle/acticle-info'
+// import Preview from '../pages/write/preview'
 class BasicRoute extends  React.Component{
   render(){
     return(
@@ -11,7 +13,9 @@ class BasicRoute extends  React.Component{
         <Switch>
             <Route exact path="/" component={App}/>
             <Route exact path="/write" component={Write}/>
-            <Route exact path="/manage/acticle" component={ManageActicle}/>            
+            {/* <Route exact path='/write/preview/:title/:text' component={Preview} /> */}
+            <Route exact path="/manage/acticle" component={ManageActicle}/>         
+            <Route exact path="/acticle/" component={ActicleInfo} />   
             <Route component={NoMatch}/>
         </Switch>
       </HashRouter>

@@ -68,5 +68,13 @@ class Http {
       return res.data.data.list
     })
   }
+  static acticleInfo(userid,index){
+    let url = this.baseUrl
+    return axios
+    .post(`${url}/info`,JSON.stringify({userid,index}))
+    .then((res)=>{
+      return res.data
+    })
+  }
 }
 export default Http

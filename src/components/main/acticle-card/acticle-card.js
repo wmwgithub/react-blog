@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card ,Icon,Pagination,Rate} from 'antd'
+import {Card ,Pagination,Rate} from 'antd'
 import './acticle-card.less'
 import Http from '../../../method/http.js'
 class ActicleCard extends React.Component{
@@ -9,6 +9,9 @@ class ActicleCard extends React.Component{
       acticleArray:[],
       total:1,
     }
+  }
+  static callbackFun=()=>{
+    this.httpMethod(false)
   }
   httpMethod(showMsg){
     Http.getActicle(showMsg).then((res)=>{
@@ -29,14 +32,26 @@ class ActicleCard extends React.Component{
   HandlerOnChange=(page,PageSize)=>{
     this.httpMethod(false)
   }
+  handleShowActicle=(userid,index)=>{
+    // window.open(`/#/acticle/${userid}/${index}`)
+    window.open(`/#/acticle/?userid=${userid}&index=${index}`)
+    // window.open(`/#/acticle/`)
+
+  }
+  HandleStopPropagation=(event)=>{
+    console.log('star on change')
+  }
   render(){
     return(
       <div>
         {
           this.state.acticleArray.map((value,index)=>        
-          <Card className='acticleCard' title={`${index+1}. ${value.title} `} extra={<Rate count={1} />} key={`ActicleCard${index}`} >
-          <p className='text'>{value.text}</p>
-          <p className='time'>{value.data}</p>
+          <Card  className='acticleCard' title={`${index+1}. ${value.title} `} extra={<Rate count={1} onChange={this.HandleStopPropagation}/>} key={`ActicleCard${index}`} >
+            <div onClick={()=>this.handleShowActicle('userid',value.id)}>
+              <p className='text'>{value.text}</p>
+              <br/>
+              <p className='time'>{value.date}</p>
+            </div>
          </Card>)
         }
         <div className='bottomPage'>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Row,Col} from 'antd'
-import './background.less'
+import './index.less'
 class Background extends React.Component{
 	render(){
 		return (

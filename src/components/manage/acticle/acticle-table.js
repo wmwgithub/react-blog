@@ -1,5 +1,5 @@
 import React from 'react'
-import {Table,Popconfirm,Button,Row,Col} from 'antd'
+import {Table,Popconfirm,Button,Link} from 'antd'
 import Http from  '../../../method/http'
 import './acticletable.less'
 class ActicleTable extends React.Component{
@@ -25,7 +25,7 @@ class ActicleTable extends React.Component{
       key:'editor',
       title:'编辑文章',
       render:(data)=>{
-        return  <Button type='primary'>编辑</Button>
+        return  <Button type='primary'><a href={`/#/write?userid=userid&index=${data.id}`}>编辑</a></Button>
       },
       width:100
     },{
