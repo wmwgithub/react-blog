@@ -1,7 +1,8 @@
 import React from 'react'
 import {Card ,Pagination,Rate} from 'antd'
-import './acticle-card.less'
+import './article-card.less'
 import Http from '../../../method/http.js'
+import {Lists} from '../../../method/get-mapping'
 class ActicleCard extends React.Component{
   constructor(props,context){
     super(props,context)
@@ -13,12 +14,10 @@ class ActicleCard extends React.Component{
   static callbackFun=()=>{
     this.httpMethod(false)
   }
-  httpMethod(showMsg){
-    Http.getActicle(showMsg).then((res)=>{
-      // console.log(res)
-      this.setState({
-        acticleArray:res
-      })
+  async httpMethod(){
+    let listsData = await Lists.getArticleLists()
+    this.setState({
+      acticleArray:listsData
     })
     Http.totalActicle().then((res)=>{
       this.setState({

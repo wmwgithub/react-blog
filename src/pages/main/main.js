@@ -4,7 +4,7 @@ import TopNavBar from '../../components/main/nav-bar/nav-bar'
 import Background from '../../components/main/background'
 import UserCard from '../../components/main/user-card/user-card'
 import EditorButton from '../../components/main/editor-button'
-import ActicleCard from '../../components/main/acticle-card/acticle-card'
+import ActicleCard from '../../components/main/article-card/article-card'
 import './main.less'
 class Main extends Component {
   render() {
