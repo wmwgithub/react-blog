@@ -27,7 +27,6 @@ class ActicleCard extends React.Component{
     })
   }
   handleOnChange =(page,pageSize)=>{
-    console.log("handlechange",page,pageSize)
     this.getLists(page,pageSize)
   }
   handleShowActicle=(userid,index)=>{
@@ -51,7 +50,7 @@ class ActicleCard extends React.Component{
           this.state.acticleArray.map((value,index)=>        
           <Card  className='acticleCard' title= {value.title} extra={this.star(value.star)} key={`ActicleCard${index}`} >
             <div onClick={()=>this.handleShowActicle('userid',value.id)}>
-              <p className='text'>{value.content}</p>
+              <div className="text" dangerouslySetInnerHTML={{__html:value.content}}></div>
               <br/>
               <p className='time'>{value.time}</p>
             </div>
