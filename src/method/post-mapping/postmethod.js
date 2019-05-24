@@ -16,5 +16,19 @@ class PostMethod{
         return res.data
     })
   }
+  writePost(router,data){
+    console.log("write",data)
+    return axios({
+      headers:{
+      "Content-Type":"application/x-www-form-urlencoded"
+      },
+      url:this.baseUrl+router,
+      method:"post",
+      data:data,
+    })
+    .then((res)=>{
+      return res.data
+    })
+  }
  }
 export default PostMethod

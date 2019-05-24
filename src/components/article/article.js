@@ -1,10 +1,10 @@
 import React from 'react'
-import{Card,Row,Col} from 'antd'
-import UserCard from '../main/user-card/user-card'
-import '../main/user-card/user-card.less'
-import Background from '../main/background/index'
-import '../main/background/index.less'
 import Http from '../../method/http'
+import{Card,Row,Col} from 'antd'
+import {Jumbotron,UserCard} from '../main'
+import '../main/jumbotron/index.less'
+import '../main/user-card/index.less'
+
 export default class ActicleInfo extends React.Component{
   state={
     acticle:{}
@@ -22,12 +22,11 @@ export default class ActicleInfo extends React.Component{
   render(){
     return(
       <div>
-      <Background singnature='love code & positive' name='琅琊旻M'></Background>
+      <Jumbotron singnature='love code & positive' name='琅琊旻M' />
       <Row>
         <Col xs={{span:1}} lg={{span:3}}></Col>
         <Col xs={{span:22}} lg={{span:18}}>
-        <UserCard imgSrc='https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png' userName='琅琊旻M' 
-            userSingnature='love code & positive'/>
+        <UserCard />
         <Card title={this.state.acticle.title}>
           <div dangerouslySetInnerHTML={{__html:this.state.acticle.text}} />
           <br/>

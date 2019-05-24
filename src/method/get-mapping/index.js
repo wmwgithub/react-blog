@@ -1,1 +1,3 @@
-export {default as Lists} from './lists'
+export {default as lists} from './lists'
+export  {default as userInfo } from './user-info'
+export {default as total} from './total'

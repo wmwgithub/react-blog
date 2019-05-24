@@ -1,0 +1,21 @@
+@boxHeight: 240px;
+@NavBarColor: #00ffff;
+@boxUserNameSize: 30px;
+@boxFontColor: white;
+.jumbotronBox {
+  height: @boxHeight;
+  text-align: center;
+  //css 媒体查询属性 告诉浏览器 当前屏幕最小值是960 大于960的屏幕将要执行下面的代码
+  @media screen and (min-width:960px) {
+  text-align: left;
+  }
+  .signature {
+    padding-top: @boxHeight/2;
+    color: @boxFontColor;
+  }
+  .userName {
+    font-size: @boxUserNameSize;
+    color: @boxFontColor;
+  }
+}
+

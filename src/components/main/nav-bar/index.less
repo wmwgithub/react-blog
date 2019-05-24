@@ -1,0 +1,61 @@
+@import '../../../less/config.less';
+@IconSize: 30px;
+@SearchIconSize: 20px;
+@IconColor: white;
+@liheight: 48px;
+.navColor {
+  height: 48px;
+  @media screen and(min-width:800px) {
+    height: 55px;
+  }
+  @media screen and(min-width:900px) {
+    height: 60px;
+  }
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.ant-drawer-body {
+  padding: 0;
+}
+ul {
+  padding: 0;
+}
+
+.articleTypeList {
+  .select {
+    color: @NavBarColor;
+    border-left: 4px @NavBarColor solid;
+  }
+  li {
+    height: @liheight;
+    line-height: @liheight;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: bolder;
+
+    a {
+      /*消除自身颜色的影响*/
+      color: inherit;
+      padding-left: 20px;
+      font-size: 16px;
+    }
+    span {
+      padding-right: 20px;
+    }
+  }
+}
+.IconSize {
+  font-size: @IconSize;
+  color: @IconColor;
+}
+.IconColor {
+  font-size: 20px;
+  color: @IconColor;
+}
+.AvatarStyle {
+  margin-left: 10px;
+}
