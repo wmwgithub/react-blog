@@ -75,8 +75,9 @@ class TopNavBar extends React.Component {
     );
     return this.state.showSearch ? (
       /**@close 把父组件控制子组件的状态的函数直接传给子组件 然后就能通过子组件调用父组件内部的函数
-       * */ 
-      <Search visiable={this.state.showSearch} close={this.showSearch}/>
+       * */
+
+      <Search visiable={this.state.showSearch} close={this.showSearch} />
     ) : (
       <div className="navColor">
         <Icon type="bars" className="IconSize" onClick={this.showDrawer} />
@@ -104,9 +105,13 @@ class TopNavBar extends React.Component {
         </Drawer>
         <div>
           <Icon type="search" className="IconColor" onClick={this.showSearch} />
-          <Popover placement="bottom" content={avatarContent} trigger="click">
-            <Avatar src={this.props.avatar} className="AvatarStyle" />
-          </Popover>
+          {this.props.avatar ? (
+            <Popover placement="bottom" content={avatarContent} trigger="click">
+              <Avatar src={this.props.avatar} className="AvatarStyle" />
+            </Popover>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     );

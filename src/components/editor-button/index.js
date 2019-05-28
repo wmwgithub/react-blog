@@ -5,7 +5,7 @@ export default () => {
   return (
     <div style={{ marginTop: "20px" }}>
       <Link to="/manage/acticle">
-        <Button size="small">
+        <Button size="small" type="primary">
           <Icon type="tool" />
           管理文章
         </Button>

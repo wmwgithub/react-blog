@@ -1,3 +1,11 @@
 export{ default as PreviewArticle} from './article/preview'
-export {default as ActicleInfo} from './article/article'
 export {default as Search} from './search/search'
+export {default as ArticleStyle} from './article/article-style'
+export {default as ArticleTable} from './article-table/article-table'
+
+export {default as Jumbotron} from './jumbotron'
+export {default as TopNavBar} from './nav-bar'
+export {default as UserCard} from './user-card'
+export {default as EditorButton} from './editor-button'
+export {default as ArticleCard} from './article-card'
+export {default as AddButton} from './add-button'

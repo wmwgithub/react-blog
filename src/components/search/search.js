@@ -1,6 +1,7 @@
 import React from "react";
 import { Input, Icon, Popover, Form } from "antd";
 import { search } from "../../method/get-mapping";
+import url from "../../utils/url";
 const FormItem = Form.Item;
 class Search extends React.Component {
   constructor(props) {
@@ -22,24 +23,28 @@ class Search extends React.Component {
       callback("输入要搜索的文字");
       return false;
     }
+
     let content = await search(value);
-    console.log(content);
     this.setState({
       searchContent: content
     });
     callback();
   };
+  handleEnter = () => {
+    let keywords = this.props.form.getFieldValue("title");
+    url("search",keywords);
+  };
   render() {
     const { getFieldDecorator } = this.props.form;
     return this.props.visiable ? (
-        // 蜜汁bug FormItem 必须写在Popover 外面 否则点击Input组件 不会触发Popover
+      // 蜜汁bug FormItem 必须写在Popover 外面 否则点击Input组件 不会触发Popover
       <FormItem>
         <Popover
           placement="bottom"
           title="搜索结果"
           content={this.state.searchContent.map((value, index) => (
             <div key={index}>
-              <a href={`/#/acticle/?userid='userid'&index=${index}`}>{value}</a>
+              <a href={`/#/article/${value.id}`}>{value.title}</a>
               <br />
             </div>
           ))}
@@ -53,10 +58,11 @@ class Search extends React.Component {
             ]
           })(
             <Input
-              prefix={<Icon type="search" />}
+              prefix={<Icon type="search" onClick={this.handleEnter} />}
               size="large"
               placeholder="搜索"
               suffix={<Icon type="close" onClick={() => this.props.close()} />}
+              onPressEnter={this.handleEnter}
             />
           )}
         </Popover>

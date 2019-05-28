@@ -9,21 +9,27 @@ import {
   AddButton
 } from "../../components/main";
 import "./main.less";
-import { userInfo } from "../../method/get-mapping";
-
+import { Cookies } from "react-cookie";
+const cookie = new Cookies()
 class Main extends Component {
   state={
     avatar:"",
     name: "",
     signature: ""
   }
-  async componentDidMount(){
-    let user=await userInfo();
-    this.setState({
-      avatar:user.avatar,
-      name: user.name,
-      signature: user.signature
-    })
+  componentDidMount(){
+    if(cookie.get("openid")){
+      //可以获取到openid cookie没失效
+      this.setState({
+        avatar:cookie.get("avatar"),
+        name: cookie.get("name"),
+        signature: "个性签名功能等待开发中😁"
+      })
+    }else{
+      //cookie已经失效刷新页面
+      window.location.reload()
+    }
+
   }
   render() {
     return (
@@ -62,7 +68,7 @@ class Main extends Component {
               <EditorButton />
             </div>
             <Divider />
-            <ArticleCard />
+            <ArticleCard showPagination={true}/>
           </Col>
           <Col xs={{ span: 1 }} lg={{ span: 3 }} />
         </Row>

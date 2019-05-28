@@ -1,11 +1,11 @@
 import React from 'react'
-import ActicleTable from '../../components/manage/acticle/acticle-table'
+import {ArticleTable} from '../../components/'
 export default class ManageActicle extends React.Component{
   render(){
     return(
-      <div>
-        <h1>文章管理</h1>
-        <ActicleTable/>
+      <div style={{margin:"20px"}}>
+        <h1 >文章管理</h1>
+        <ArticleTable/>
       </div>
     )
   }

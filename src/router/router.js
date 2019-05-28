@@ -4,9 +4,8 @@ import App from '../App'
 import Write from '../pages/write'
 import NoMatch from '../pages/no-match'
 import ManageActicle from '../pages/manage/manage'
-import {ActicleInfo} from '../components'
-import {Login} from '../pages'
-
+import {Article} from '../pages'
+import {Login, SearchPage} from '../pages'
 class BasicRoute extends  React.Component{
   render(){
     return(
@@ -19,7 +18,8 @@ class BasicRoute extends  React.Component{
             <Route exact path="/main" component={App}/>
             <Route exact path="/write" component={Write}/>
             <Route exact path="/manage/acticle" component={ManageActicle}/>         
-            <Route exact path="/acticle/" component={ActicleInfo} />   
+            <Route exact path="/article/:id" component={Article} />   
+            <Route exact path= "/search/:keywords" component={SearchPage}/>
             <Route component={NoMatch}/>
         </Switch>
       </HashRouter>

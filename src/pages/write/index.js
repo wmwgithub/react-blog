@@ -5,8 +5,9 @@ import { Form, Input, Button, Row, Col, message, Radio, Drawer } from "antd";
 import Http from "../../method/http";
 import { PreviewArticle } from "../../components/";
 import "./index.less";
-import { userInfo } from "../../method/get-mapping";
-import { write } from "../../method/post-mapping";
+import { write } from "../../method"
+import { Cookies } from "react-cookie";
+const cookie = new Cookies()
 const formItemLayout = {
   labelCol: {
     xs: { span: 6 },
@@ -37,7 +38,7 @@ class Editor extends React.Component {
       search = search.match(rg);
       let [userid, index] = [search[0].split("=")[1], search[1].split("=")[1]];
       Http.acticleInfo(userid, index).then(res => {
-        // console.log(res)
+       
         this.setState({
           title: res.title
         });
@@ -51,10 +52,9 @@ class Editor extends React.Component {
     }
   }
   async componentDidMount() {
-    let user = await userInfo();
     this.setState({
-      avatar: user.avatar,
-      name: user.name
+      avatar:cookie.get("avatar") ,
+      name: cookie.get("name")
     });
   }
   handleChange = editorState => {
@@ -87,7 +87,7 @@ class Editor extends React.Component {
       let writeResult = await write(values.title,values.type,text);
       console.log(writeResult)
       if(writeResult){
-        // window.history.back(-1)
+        window.history.back(-1)
       }
     });
   };

@@ -4,9 +4,9 @@ const getmethod = new GetMethod();
 const  cookie = new Cookies()
 export default async (page)=>{
     let userId=cookie.get("id")
-    console.log(userId)
+    // console.log(userId)
     let total = await getmethod.http(`/total?userid=${userId}`)
-    console.log('total',total)
+    // console.log('total',total)
     if(total){
         return total
     }
