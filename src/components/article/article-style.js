@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Divider } from "antd";
-import { UserCard } from "../main";
+import { UserCard } from "../";
 import "../jumbotron/index.less";
 import "../user-card/index.less";
 import "./index.less";

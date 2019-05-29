@@ -1,9 +1,10 @@
 import React from "react";
-import { UserCard } from "../main";
+import { UserCard } from "../";
 import "./index.less"
+import { Time } from "../../utils";
 export default props => {
-  let date = new Date();
-  let time = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
+  let date = new Date().getTime();
+  let time = new Time(date,"YYY.MM.DD",".").getTime();
   return (
     <div className="preview">
       <h1>{props.title}</h1>

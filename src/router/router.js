@@ -1,11 +1,7 @@
 import React from 'react'
 import {HashRouter,Route,Switch} from 'react-router-dom'
 import App from '../App'
-import Write from '../pages/write'
-import NoMatch from '../pages/no-match'
-import ManageActicle from '../pages/manage/manage'
-import {Article} from '../pages'
-import {Login, SearchPage} from '../pages'
+import {Write,NoMatch,Manage,Article,Login, SearchPage} from '../pages'
 class BasicRoute extends  React.Component{
   render(){
     return(
@@ -17,7 +13,8 @@ class BasicRoute extends  React.Component{
             <Route exact path="/main/:type" component={App}/>
             <Route exact path="/main" component={App}/>
             <Route exact path="/write" component={Write}/>
-            <Route exact path="/manage/acticle" component={ManageActicle}/>         
+            <Route exact path="/write/:articleId" component={Write}/>
+            <Route exact path="/manage/acticle" component={Manage}/>         
             <Route exact path="/article/:id" component={Article} />   
             <Route exact path= "/search/:keywords" component={SearchPage}/>
             <Route component={NoMatch}/>

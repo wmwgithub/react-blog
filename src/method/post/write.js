@@ -16,6 +16,7 @@ export default async ( title,type,content) => {
   console.log(writeResult)
   if(writeResult.userid){
       message.success('~成功发布文章~')
+      window.history.back(-1);
       return true    
   }
   return false

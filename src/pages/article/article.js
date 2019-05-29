@@ -1,8 +1,8 @@
 import React from "react";
 import { ArticleStyle } from "../../components/";
 import { showArticle } from "../../method";
-import Time from "../../utils/time";
-import { TopNavBar } from "../../components/main";
+import {Time} from "../../utils";
+import { TopNavBar } from "../../components";
 import { Col, Row, Affix, Icon, Divider } from "antd";
 import { Link } from "react-router-dom";
 import "./index.less";

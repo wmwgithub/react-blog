@@ -2,12 +2,11 @@ import React from "react";
 import BraftEditor from "braft-editor";
 import "braft-editor/dist/index.css";
 import { Form, Input, Button, Row, Col, message, Radio, Drawer } from "antd";
-import Http from "../../method/http";
 import { PreviewArticle } from "../../components/";
 import "./index.less";
-import { write } from "../../method"
+import { write, modify, update } from "../../method";
 import { Cookies } from "react-cookie";
-const cookie = new Cookies()
+const cookie = new Cookies();
 const formItemLayout = {
   labelCol: {
     xs: { span: 6 },
@@ -26,34 +25,36 @@ class Editor extends React.Component {
     editorState: BraftEditor.createEditorState(null),
     editorHeight: height,
     title: "",
+    type: 1,
     drawerVisable: false,
     name: "",
     avatar: "",
-    html:""
+    html: ""
   };
-  componentWillMount() {
-    let search = this.props.location.search;
-    if (search) {
-      let rg = /=+(\w)*/gi;
-      search = search.match(rg);
-      let [userid, index] = [search[0].split("=")[1], search[1].split("=")[1]];
-      Http.acticleInfo(userid, index).then(res => {
-       
-        this.setState({
-          title: res.title
-        });
-        this.props.form.setFieldsValue({
-          title: res.title
-        });
-        this.props.form.setFieldsValue({
-          mainText: BraftEditor.createEditorState(res.text)
-        });
+
+  async componentDidMount() {
+    if (this.props.match.params.articleId) {
+      //判断有没有修改文章的权限
+      let articleInfo = await modify(this.props.match.params.articleId);
+      console.log(articleInfo);
+      this.setState({
+        //文章标题
+        title: articleInfo.title,
+        //文章内容
+        editorState: BraftEditor.createEditorState(articleInfo.content),
+        //文章类型
+        type: articleInfo.type
+      });
+
+      this.props.form.setFieldsValue({
+        title: articleInfo.title
+      });
+      this.props.form.setFieldsValue({
+        mainText: BraftEditor.createEditorState(articleInfo.content)
       });
     }
-  }
-  async componentDidMount() {
     this.setState({
-      avatar:cookie.get("avatar") ,
+      avatar: cookie.get("avatar"),
       name: cookie.get("name")
     });
   }
@@ -69,26 +70,36 @@ class Editor extends React.Component {
     } else if (value.length > 20) {
       callback("标题长度不超过20个字");
     } else {
-      /**
-       * 储存title值 方便预览
-       */
       this.setState({ title: value });
       callback();
     }
   };
   submitText = event => {
-    this.props.form.validateFieldsAndScroll(async(err, values) => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
       if (err) {
         message.error(err.title.errors[0].message);
         return 0;
       }
       let text = values.mainText.toHTML();
-      console.log(values.title, values.type, text);
-      let writeResult = await write(values.title,values.type,text);
-      console.log(writeResult)
-      if(writeResult){
-        window.history.back(-1)
+      //写文章
+      write(values.title, values.type, text);
+    });
+  };
+  handleUpdate = event => {
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (err) {
+        message.error(err.title.errors[0].message);
+        return 0;
       }
+      let text = values.mainText.toHTML();
+      //写文章
+      //参数过多建议采用es6结构赋值,这样不需要考虑传参的顺序
+      update({
+        title: values.title,
+        type: values.type,
+        content: text,
+        articleId: this.props.match.params.articleId
+      });
     });
   };
   preview = () => {
@@ -142,7 +153,7 @@ class Editor extends React.Component {
                   required: true
                 }
               ],
-              initialValue: 1
+              initialValue: this.state.type
             })(
               <Radio.Group>
                 <Radio value={1}>第一类</Radio>
@@ -177,9 +188,15 @@ class Editor extends React.Component {
             <Row>
               <Col span={18} />
               <Col span={6}>
-                <Button type="primary" onClick={this.submitText}>
-                  提交
-                </Button>
+                {this.props.match.params.articleId ? (
+                  <Button type="primary" onClick={this.handleUpdate}>
+                    更新
+                  </Button>
+                ) : (
+                  <Button type="primary" onClick={this.submitText}>
+                    提交
+                  </Button>
+                )}
               </Col>
             </Row>
           </FormItem>

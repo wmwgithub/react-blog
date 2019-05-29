@@ -1,5 +1,5 @@
 import React from "react";
-import { TopNavBar } from "../../components/main";
+import { TopNavBar } from "../../components";
 import { Affix, Row, Col, Divider } from "antd";
 import "./search.less";
 import SearchCard from "./search-card";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Input, Icon, Popover, Form } from "antd";
-import { search } from "../../method/get-mapping";
-import url from "../../utils/url";
+import { search } from "../../method";
+import {url} from "../../utils";
 const FormItem = Form.Item;
 class Search extends React.Component {
   constructor(props) {

@@ -1,8 +1,7 @@
 import React from "react";
 import { Table, Popconfirm, Button } from "antd";
-import { lists, total } from "../../../method/get-mapping";
-import { deleteArticle } from "../../method";
-import Time from "../../utils/time";
+import { lists, total ,deleteArticle} from "../../method";
+import {Time} from "../../utils";
 import "./index.less";
 class ArticleTable extends React.Component {
   state = {
@@ -38,7 +37,7 @@ class ArticleTable extends React.Component {
         render: data => {
           return (
             <Button type="primary">
-              <a href={`/#/write?userid=userid&index=${data.id}`}>编辑</a>
+              <a href={`/#/write/${data.id}`}>编辑</a>
             </Button>
           );
         }

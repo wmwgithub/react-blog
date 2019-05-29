@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Pagination, Rate } from "antd";
 import "./index.less";
-import { lists, total } from "../../../method/get-mapping";
-import Time from "../../../utils/time";
-import url from "../../../utils/url";
+import { lists, total } from "../../method";
+import {Time} from "../../utils";
+import {url} from "../../utils";
 class ActicleCard extends React.Component {
   constructor(props, context) {
     super(props, context);

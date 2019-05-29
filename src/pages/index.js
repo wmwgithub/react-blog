@@ -1,4 +1,6 @@
-
 export {default as Login} from './login/login'
 export {default as SearchPage} from './search/search'
 export {default as Article} from './article/article'
+export {default as NoMatch} from './no-match'
+export {default as Write} from './write'
+export {default as Manage} from './manage/manage'

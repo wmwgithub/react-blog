@@ -1,4 +1,4 @@
-import { ArticleCard } from "../../components/main";
+import { ArticleCard } from "../../components";
 import {  search } from "../../method";
 
 class SearchCard extends ArticleCard{

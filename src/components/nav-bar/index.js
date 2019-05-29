@@ -4,7 +4,7 @@ import { Icon, Avatar, Popover, Drawer, Button } from "antd";
 import { Link } from "react-router-dom";
 import "./index.less";
 import { Cookies } from "react-cookie";
-import { Search } from "../..";
+import { Search } from "../../components";
 const myCookie = new Cookies();
 const articleTypeLists = [
   { type: "全部文章", count: 100 },
@@ -76,7 +76,6 @@ class TopNavBar extends React.Component {
     return this.state.showSearch ? (
       /**@close 把父组件控制子组件的状态的函数直接传给子组件 然后就能通过子组件调用父组件内部的函数
        * */
-
       <Search visiable={this.state.showSearch} close={this.showSearch} />
     ) : (
       <div className="navColor">

@@ -7,7 +7,7 @@ import {
   ArticleCard,
   EditorButton,
   AddButton
-} from "../../components/main";
+} from "../../components";
 import "./main.less";
 import { Cookies } from "react-cookie";
 const cookie = new Cookies()
